@@ -62,7 +62,12 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String = when {
+    age % 100 in 11..15 || age % 10 == 0 || age % 10 in 5..9 -> "$age лет"
+    age % 10 in 2..4 -> "$age года"
+    age % 10 == 1 -> "$age год"
+    else -> "не существует"
+}
 
 /**
  * Простая
@@ -73,20 +78,29 @@ fun ageDescription(age: Int): String = TODO()
  */
 fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
-                   t3: Double, v3: Double): Double = TODO()
+                   t3: Double, v3: Double): Double {
+    val s1 = t1 * v1
+    val s2 = t2 * v2
+    val s3 = t3 * v3
+    val s = (s1 + s2 + s3) / 2
+    return if (s <= s1) s / v1 else
+        if (s <= s1 + s2) (s - s1) / v2 + t1
+    else (s - s1 - s2) / v3 + t2 + t1
+}
 
 /**
  * Простая
  *
- * Нa шахматной доске стоят черный король и две белые ладьи (ладья бьет по горизонтали и вертикали).
- * Определить, не находится ли король под боем, а если есть угроза, то от кого именно.
- * Вернуть 0, если угрозы нет, 1, если угроза только от первой ладьи, 2, если только от второй ладьи,
- * и 3, если угроза от обеих ладей.
- * Считать, что ладьи не могут загораживать друг друга
- */
+* Нa шахматной доске стоят черный король и две белые ладьи (ладья бьет по горизонтали и вертикали).
+* Определить, не находится ли король под боем, а если есть угроза, то от кого именно.
+* Вернуть 0, если угрозы нет, 1, если угроза только от первой ладьи, 2, если только от второй ладьи,
+* и 3, если угроза от обеих ладей.
+* Считать, что ладьи не могут загораживать друг друга
+*/
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
                        rookX2: Int, rookY2: Int): Int = TODO()
+
 
 /**
  * Простая
@@ -110,7 +124,28 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    var x1 = a
+    var x2 = b
+    var max = c
+    if (x1 > max) {
+        x1 = x1 + max
+        max = x1 - max
+        x1 = x1 - max
+    }
+    if (x2 > max) {
+     x2 = x2 + max
+     max = x2 - max
+        x2 = x2 - max
+    }
+    if ((x1 + x2) < max) return -1
+        return when {
+        (x1 * x1) + (x2 * x2) > (max * max) -> 0
+        (x1 * x1) + (x2 * x2) == (max * max) -> 1
+        (x1 * x1) + (x2 * x2) < (max * max) -> 2
+        else -> -1
+    }
+}
 
 /**
  * Средняя
