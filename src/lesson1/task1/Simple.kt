@@ -67,7 +67,7 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = (hours * 3600) + (min
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = (vershoks + arshins * 16 + sagenes * 48) * 0.04445
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = ((vershoks + arshins * 16 + sagenes * 48) * 0.04445)
 
 /**
  * Тривиальная
@@ -79,7 +79,7 @@ fun angleInRadian(grad: Int, min: Int, sec: Int): Double {
     val second = sec / 3600.0
     val minutes = min / 60.0
     val gradus = grad + minutes + second
-    return gradus * (kotlin.math.PI / 180)
+    return (gradus * (kotlin.math.PI / 180))
 }
 
 /**
@@ -105,7 +105,7 @@ fun thirdDigit(number: Int): Int = number / 100 % 10
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = (hoursArrive - hoursDepart) * 60 + (minutesArrive - minutesDepart)
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int = ((hoursArrive - hoursDepart) * 60) + (minutesArrive - minutesDepart)
 
 /**
  * Простая
