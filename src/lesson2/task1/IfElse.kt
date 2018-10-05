@@ -144,8 +144,8 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         max = b
         x2 = c
     }
+    if ((x1 + x2) < max) return -1
     return when {
-        (x1 + x2) < max -> -1
         sqr(x1) + sqr(x2) > sqr(max) -> 0
         sqr(x1) + sqr(x2) == sqr(max) -> 1
         sqr(x1) + sqr(x2) < sqr(max) -> 2
