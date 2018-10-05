@@ -87,7 +87,7 @@ return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
  */
 fun circleInside(x1: Double, y1: Double, r1: Double,
                  x2: Double, y2: Double, r2: Double): Boolean =
-    if (sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2) true else false
+        sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2
 /**
  * Средняя
  *
