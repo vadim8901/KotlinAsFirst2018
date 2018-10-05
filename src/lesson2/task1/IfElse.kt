@@ -1,7 +1,9 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -65,8 +67,7 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
 fun ageDescription(age: Int): String = when {
     age % 100 in 11..15 || age % 10 == 0 || age % 10 in 5..9 -> "$age лет"
     age % 10 in 2..4 -> "$age года"
-    age % 10 == 1 -> "$age год"
-    else -> "не существует"
+    else -> "$age год"
 }
 
 /**
@@ -83,23 +84,30 @@ fun timeForHalfWay(t1: Double, v1: Double,
     val s2 = t2 * v2
     val s3 = t3 * v3
     val s = (s1 + s2 + s3) / 2
-    return if (s <= s1) s / v1 else
-        if (s <= s1 + s2) (s - s1) / v2 + t1
-    else (s - s1 - s2) / v3 + t2 + t1
+    return when {
+        s <= s1 -> s / v1
+        s <= s1 + s2 -> (s - s1) / v2 + t1
+        else -> (s - s1 - s2) / v3 + t2 + t1
+    }
 }
 
 /**
  * Простая
  *
-* Нa шахматной доске стоят черный король и две белые ладьи (ладья бьет по горизонтали и вертикали).
-* Определить, не находится ли король под боем, а если есть угроза, то от кого именно.
-* Вернуть 0, если угрозы нет, 1, если угроза только от первой ладьи, 2, если только от второй ладьи,
-* и 3, если угроза от обеих ладей.
-* Считать, что ладьи не могут загораживать друг друга
-*/
+ * Нa шахматной доске стоят черный король и две белые ладьи (ладья бьет по горизонтали и вертикали).
+ * Определить, не находится ли король под боем, а если есть угроза, то от кого именно.
+ * Вернуть 0, если угрозы нет, 1, если угроза только от первой ладьи, 2, если только от второй ладьи,
+ * и 3, если угроза от обеих ладей.
+ * Считать, что ладьи не могут загораживать друг друга
+ */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int = TODO()
+                       rookX2: Int, rookY2: Int): Int {
+    return if (((kingX != rookX1) && (kingY != rookY1)) && ((kingX != rookX2) && (kingY != rookY2))) 0
+    else if (((kingX == rookX1) || (kingY == rookY1)) && ((kingX == rookX2) || (kingY == rookY2))) 3
+    else if ((kingX == rookX1) || (kingY == rookY1)) 1
+    else 2
+}
 
 
 /**
@@ -129,20 +137,18 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     var x2 = b
     var max = c
     if (x1 > max) {
-        x1 = x1 + max
-        max = x1 - max
-        x1 = x1 - max
+        max = a
+        x1 = c
     }
     if (x2 > max) {
-     x2 = x2 + max
-     max = x2 - max
-        x2 = x2 - max
+        max = b
+        x2 = c
     }
-    if ((x1 + x2) < max) return -1
-        return when {
-        (x1 * x1) + (x2 * x2) > (max * max) -> 0
-        (x1 * x1) + (x2 * x2) == (max * max) -> 1
-        (x1 * x1) + (x2 * x2) < (max * max) -> 2
+    return when {
+        (x1 + x2) < max -> -1
+        sqr(x1) + sqr(x2) > sqr(max) -> 0
+        sqr(x1) + sqr(x2) == sqr(max) -> 1
+        sqr(x1) + sqr(x2) < sqr(max) -> 2
         else -> -1
     }
 }
