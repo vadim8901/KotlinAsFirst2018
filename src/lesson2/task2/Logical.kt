@@ -2,6 +2,7 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import kotlin.math.sqrt
 
 /**
  * Пример
@@ -43,7 +44,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
 fun daysInMonth(month: Int, year: Int): Int {
-return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
+return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
     when (month) {
         1 -> 31
         2 -> 29
@@ -58,6 +59,7 @@ return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
         11 -> 30
         12 -> 31
         else -> 1
+    }
 }
     else when (month){
     1 -> 31
@@ -85,7 +87,7 @@ return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
  */
 fun circleInside(x1: Double, y1: Double, r1: Double,
                  x2: Double, y2: Double, r2: Double): Boolean =
-    if (kotlin.math.sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2) true else false
+    if (sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2) true else false
 /**
  * Средняя
  *
@@ -96,4 +98,5 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
-        ((a <= r && c <= s) || (a <= r && b <= s) || (a <= s && c <= r) || (b <= r && a <= s) || (b <= r && c <= s) || (c <= r && b <= s))
+        ((a <= r && c <= s) || (a <= r && b <= s) || (a <= s && c <= r) ||
+                (b <= r && a <= s) || (b <= r && c <= s) || (c <= r && b <= s))
