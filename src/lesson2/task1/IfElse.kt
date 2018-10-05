@@ -133,24 +133,17 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    var x1 = a
-    var x2 = b
-    var max = c
-    if (x1 > max) {
-        max = a
-        x1 = c
-    }
-    if (x2 > max) {
-        max = b
-        x2 = c
-    }
-    if ((x1 + x2) < max) return -1
-    return when {
-        sqr(x1) + sqr(x2) > sqr(max) -> 0
-        sqr(x1) + sqr(x2) == sqr(max) -> 1
-        sqr(x1) + sqr(x2) < sqr(max) -> 2
-        else -> -1
-    }
+   return if ((c > a + b) || (b > c + a) || (a > b + b)) -1 else
+    if ((sqr(a) > sqr(c) + sqr(b))
+            || (sqr(b) > sqr(c) + sqr(a))
+            || (sqr(c) > sqr(a) + sqr(b))) 2
+    else if ((sqr(c) == sqr(a) + sqr(b))
+            || (sqr(a) == sqr(c) + sqr(b))
+            || (sqr(b) == sqr(c) + sqr(a))) 1
+    else if ((sqr(a) < sqr(c) + sqr(b))
+            || (sqr(b) < sqr(c) + sqr(a))
+            || (sqr(c) < sqr(a) + sqr(b))) 0
+    else -1
 }
 
 /**
