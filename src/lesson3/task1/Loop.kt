@@ -73,7 +73,7 @@ fun digitNumber(n: Int): Int {
     do {
         number /= 10
         x++
-    } while (number > 0)
+    } while (number != 0)
     return x
 }
 
@@ -104,7 +104,7 @@ fun fib(n: Int): Int {
  */
 fun lcm(m: Int, n: Int): Int {
     var k = 1
-    while (k < n * m) {
+    while (k <= n * m) {
         k += 1
         if ((k % n == 0) && (k % m == 0)) break
     }
