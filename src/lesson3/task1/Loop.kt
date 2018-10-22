@@ -198,7 +198,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 fun revert(n: Int): Int {
     var x = 0
-    var n1 = n
+    var n1: Int = n
     while (n > 0) {
         x = x * 10 + n1 % 10
         n1 /= 10
@@ -225,7 +225,13 @@ fun isPalindrome(n: Int): Boolean = n == revert(n)
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    while (n > 0) {
+        if (n % 10 == n / 10) return true
+        n / 10
+    }
+    return false
+}
 
 /**
  * Сложная
