@@ -147,7 +147,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         b1 = c
     }
     return when {
-        c1 > a1 + b1 -> -1
+        (c1 > a1 + b1) -> -1
         sqr(c1) < sqr(a1) + sqr(b1) -> 0
         sqr(c1) == sqr(a1) + sqr(b1) -> 1
         else -> 2
