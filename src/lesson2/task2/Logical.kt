@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson2.task2
 
 import lesson1.task1.sqr
@@ -44,39 +45,19 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
 fun daysInMonth(month: Int, year: Int): Int {
-return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
-    when (month) {
-        1 -> 31
-        2 -> 29
-        3 -> 31
-        4 -> 30
-        5 -> 31
-        6 -> 30
-        7 -> 31
-        8 -> 31
-        9 -> 30
-        10 -> 31
-        11 -> 30
-        12 -> 31
-        else -> 1
+    return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
+        when (month) {
+            1, 3, 5, 7, 8, 10, 12 -> 31
+            4, 6, 9, 11 -> 30
+            else -> 29
+        }
+    else when (month) {
+        1, 3, 5, 7, 8, 10, 12 -> 31
+        4, 6, 9, 11 -> 30
+        else -> 28
     }
 }
-    else when (month){
-    1 -> 31
-    2 -> 28
-    3 -> 31
-    4 -> 30
-    5 -> 31
-    6 -> 30
-    7 -> 31
-    8 -> 31
-    9 -> 30
-    10 -> 31
-    11 -> 30
-    12 -> 31
-    else -> 1
-}
-}
+
 
 /**
  * Средняя
@@ -88,6 +69,7 @@ return if ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0)) {
 fun circleInside(x1: Double, y1: Double, r1: Double,
                  x2: Double, y2: Double, r2: Double): Boolean =
         sqrt(sqr(x2 - x1) + sqr(y2 - y1)) + r1 <= r2
+
 /**
  * Средняя
  *
