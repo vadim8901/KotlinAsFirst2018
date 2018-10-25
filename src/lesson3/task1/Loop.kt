@@ -73,7 +73,7 @@ fun digitNumber(n: Int): Int {
     do {
         number /= 10
         x++
-    } while (number != 0)
+    } while (number > 0)
     return x
 }
 
@@ -103,13 +103,16 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var k = 1
-    while (k <= n * m) {
-        k += 1
-        if ((k % n == 0) && (k % m == 0)) break
+    var k = m * n
+    var m1 = m
+    var n1 = n
+    while (n1 != m1) {
+        if (n1 > m1) n1 -= m1
+        else m1 -= n1
     }
-    return k
+    return k / n1
 }
+
 
 /**
  * Простая
@@ -117,9 +120,10 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var x = 2
-    while (n % x != 0) x += 1
-    return x
+    for (i in 2..n) {
+        if (n % i == 0) return i
+    }
+    return n
 }
 
 /**
@@ -145,13 +149,8 @@ fun isCoPrime(m: Int, n: Int): Boolean = TODO()
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean {
-    var k: Long = 0
-    while (m > k * k) {
-        k += 1
-    }
-    return (n >= k * k)
-}
+fun squareBetweenExists(m: Int, n: Int): Boolean =
+        Math.floor(sqrt(n.toDouble())) - Math.ceil(sqrt(m.toDouble())) >= 0
 
 /**
  * Средняя
@@ -198,8 +197,8 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 fun revert(n: Int): Int {
     var x = 0
-    var n1: Int = n
-    while (n > 0) {
+    var n1 = n
+    while (n1 > 0) {
         x = x * 10 + n1 % 10
         n1 /= 10
     }
@@ -226,9 +225,12 @@ fun isPalindrome(n: Int): Boolean = n == revert(n)
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    while (n > 0) {
-        if (n % 10 == n / 10) return true
-        n / 10
+    if (n <= 9) return false
+    var last = n % 10
+    var n1 = n / 10
+    while (n1 > 0) {
+        if (last != n1 % 10) return true
+        n1 /= 10
     }
     return false
 }
