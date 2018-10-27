@@ -4,6 +4,7 @@ package lesson3.task1
 
 import kotlin.math.abs
 import kotlin.math.sqrt
+import kotlin.math.min
 
 /**
  * Пример
@@ -141,7 +142,15 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean = TODO()
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var k = min(m, n)
+    var l = 2
+    while (l <= k) {
+        if ((m % l == 0) && (n % l == 0)) return false
+        else l++
+    }
+    return true
+}
 
 /**
  * Простая
