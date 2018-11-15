@@ -5,6 +5,8 @@ package lesson3.task1
 import kotlin.math.abs
 import kotlin.math.sqrt
 import kotlin.math.min
+import kotlin.math.floor
+import kotlin.math.ceil
 
 /**
  * Пример
@@ -105,7 +107,7 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var k = m * n
+    val k = m * n
     var m1 = m
     var n1 = n
     while (n1 != m1) {
@@ -122,7 +124,7 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    for (i in 2..n) {
+    for (i in 2..sqrt(n.toDouble()).toInt()) {
         if (n % i == 0) return i
     }
     return n
@@ -143,11 +145,9 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var k = min(m, n)
-    var l = 2
-    while (l <= k) {
-        if ((m % l == 0) && (n % l == 0)) return false
-        else l++
+    val k = min(m, n)
+    for (i in 2..k) {
+        if ((m % i == 0) && (n % i == 0)) return false
     }
     return true
 }
@@ -160,7 +160,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean =
-        Math.floor(sqrt(n.toDouble())) - Math.ceil(sqrt(m.toDouble())) >= 0
+        floor(sqrt(n.toDouble())) - ceil(sqrt(m.toDouble())) >= 0
 
 /**
  * Средняя
@@ -197,7 +197,6 @@ fun collatzSteps(x: Int): Int {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 fun sin(x: Double, eps: Double): Double = TODO()
-
 
 /**
  * Средняя
