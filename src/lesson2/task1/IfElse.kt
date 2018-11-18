@@ -138,6 +138,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     var a1 = a
     var b1 = b
     var c1 = c
+    if ((a > b + c) || (b > c + a) || (c > a + b)) return -1
     if (c < a) {
         c1 = a
         a1 = c
@@ -146,7 +147,6 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         c1 = b
         b1 = c
     }
-    if (c1 > a1 + b1) return -1
     return when {
         sqr(c1) > sqr(a1) + sqr(b1) -> 2
         sqr(c1) < sqr(a1) + sqr(b1) -> 0
