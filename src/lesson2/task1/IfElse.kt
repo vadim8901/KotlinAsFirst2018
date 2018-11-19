@@ -143,7 +143,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
         c1 = a
         a1 = c
     }
-    if (c < b) {
+    if (c1 < b) {
         c1 = b
         b1 = c
     }
