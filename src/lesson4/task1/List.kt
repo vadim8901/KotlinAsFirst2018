@@ -134,12 +134,11 @@ fun abs(v: List<Double>): Double {
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double {
-    return when {
-        list.isEmpty() -> 0.0
-        else -> list.sum() / list.size
-    }
-}
+fun mean(list: List<Double>): Double =
+        when {
+            list.isEmpty() -> 0.0
+            else -> list.sum() / list.size
+        }
 
 /**
  * Средняя
@@ -151,7 +150,7 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     if (list.size == 0) return list
-    var x = list.sum() / list.size
+    val x = list.sum() / list.size
     for ((i, element) in list.withIndex()) {
         list[i] = element - x
     }
@@ -184,7 +183,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
  * Значение пустого многочлена равно 0.0 при любом x.
  */
 fun polynom(p: List<Double>, x: Double): Double {
-if (p.isEmpty()) return 0.0
+    if (p.isEmpty()) return 0.0
     var p0 = p.first()
     for (i in 1 until p.size) {
         p0 += p[i] * pow(x, i.toDouble())
@@ -224,8 +223,7 @@ fun factorize(n: Int): List<Int> {
         if (n0 % x == 0) {
             result.add(x)
             n0 /= x
-        }
-        else x += 1
+        } else x += 1
     }
     return if (result.size == 0) listOf(n) else result
 }
