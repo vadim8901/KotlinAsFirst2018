@@ -225,7 +225,7 @@ fun factorize(n: Int): List<Int> {
             n0 /= x
         } else x += 1
     }
-    return if (result.size == 0) listOf(n) else result
+    return result
 }
 
 /**
@@ -274,7 +274,7 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int = str.toInt(base)
 
 /**
  * Сложная
