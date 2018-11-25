@@ -279,7 +279,16 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val map = mutableMapOf<Int, Int>()
+    for ((element, value) in list.withIndex()) {
+        val result = map[number - value]
+        if (result == null)
+            map[value] = element
+        else return Pair(result, element)
+    }
+    return -1 to -1
+}
 
 /**
  * Очень сложная

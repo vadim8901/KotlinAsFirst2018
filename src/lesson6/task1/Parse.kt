@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import kotlin.math.max
+
 /**
  * Пример
  *
@@ -49,12 +51,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -97,7 +97,14 @@ fun dateDigitToStr(digital: String): String = TODO()
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    val number = mutableListOf<Char>()
+    for (char in phone) {
+        if (char == '+' || char in '0'..'9') number.add(char) else
+            if (char != '(' && char != ')' && char != '-' && char != ' ') return ""
+    }
+    return number.joinToString(separator = "")
+}
 
 /**
  * Средняя
@@ -109,7 +116,18 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    val jump = jumps.split(" ")
+    var max = 0
+    for (element in jump) {
+        val attempt = element.toIntOrNull()
+        if (attempt != null) max = max(attempt, max)
+        else
+            if (element != "-" && element != "" && element != "%") return -1
+    }
+    return if (max == 0) -1 else max
+}
+
 
 /**
  * Сложная
