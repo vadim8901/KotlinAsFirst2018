@@ -117,15 +117,12 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * Модуль пустого вектора считать равным 0.0.
  */
 fun abs(v: List<Double>): Double {
-    return when {
-        v.isEmpty() -> 0.0
-        else -> {
-            val x = mutableListOf<Double>()
-            for (i in v) {
-                x.add(pow(i, 2.0))
-            }
-            sqrt(x.sum())
+    return run {
+        val x = mutableListOf<Double>()
+        for (i in v) {
+            x.add(pow(i, 2.0))
         }
+        sqrt(x.sum())
     }
 }
 
@@ -150,9 +147,8 @@ fun mean(list: List<Double>): Double =
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     if (list.size == 0) return list
-    val x = list.sum() / list.size
     for ((i, element) in list.withIndex()) {
-        list[i] = element - x
+        list[i] = element - mean(list)
     }
     return list
 }
@@ -166,8 +162,6 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Double>, b: List<Double>): Double {
     var c = 0.0
-    if (a.isEmpty() && b.isEmpty()) return 0.0
-    else
         for (i in 0 until a.size)
             c += a[i] * b[i]
 
