@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson3.task1.revert
 import kotlin.math.sqrt
 import java.lang.Math.pow
 
@@ -117,14 +118,13 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * Модуль пустого вектора считать равным 0.0.
  */
 fun abs(v: List<Double>): Double {
-    return run {
-        val x = mutableListOf<Double>()
-        for (i in v) {
-            x.add(pow(i, 2.0))
-        }
-        sqrt(x.sum())
+    val x = mutableListOf<Double>()
+    for (i in v) {
+        x.add(pow(i, 2.0))
     }
+    return sqrt(x.sum())
 }
+
 
 /**
  * Простая
@@ -162,8 +162,8 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Double>, b: List<Double>): Double {
     var c = 0.0
-        for (i in 0 until a.size)
-            c += a[i] * b[i]
+    for (i in 0 until a.size)
+        c += a[i] * b[i]
 
     return c
 }
@@ -238,7 +238,19 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString("*")
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    val list = mutableListOf<Int>()
+    var n1 = n
+    if (n == 0) list.add(0) else {
+        while (n1 > 0) {
+            val k = n1 % base
+            list.add(k)
+            n1 /= base
+        }
+    }
+    return list.reversed()
+}
+
 
 /**
  * Сложная
@@ -250,6 +262,7 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  */
 fun convertToString(n: Int, base: Int): String = TODO()
 
+
 /**
  * Средняя
  *
@@ -257,7 +270,16 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    val digit = digits
+    var n = 1
+    var k = 0
+    for (i in digit.reversed()) {
+        k += i * n
+        n *= base
+    }
+    return k
+}
 
 /**
  * Сложная
@@ -278,7 +300,19 @@ fun decimalFromString(str: String, base: Int): Int = str.toInt(base)
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    val Nat = listOf<Int>(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    val Rom = listOf("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+    var n1 = n
+    var NR = ""
+    for (i in 0 until Rom.size) {
+        while (n1 >= Nat[i]) {
+            NR += Rom[i]
+            n1 -= Nat[i]
+        }
+    }
+    return NR
+}
 
 /**
  * Очень сложная
