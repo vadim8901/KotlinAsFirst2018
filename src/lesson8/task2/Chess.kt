@@ -41,7 +41,7 @@ data class Square(val column: Int, val row: Int) {
  */
 fun square(notation: String): Square {
     val columnln = "abcdefgh"
-    if (! notation.matches(Regex("""[a - h][1-8]""")))
+    if (! notation.matches(Regex("""[a-h][1-8]""")))
         throw IllegalArgumentException()
     val otvet = Square(columnln.indexOf(notation[0]) + 1, notation[1].toInt() - '0'.toInt())
     return otvet
