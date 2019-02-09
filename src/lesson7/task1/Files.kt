@@ -33,8 +33,7 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
                 if (word.length + currentLineLength >= lineLength) {
                     outputStream.newLine()
                     currentLineLength = 0
-                }
-                else {
+                } else {
                     outputStream.write(" ")
                     currentLineLength++
                 }
@@ -57,9 +56,19 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
     var result = mutableMapOf<String, Int>()
-    val string = File(inputName).readText()
-    for (i in substrings)
-        result[i] = i.toRegex(RegexOption.IGNORE_CASE).findAll(string).toList().size
+    val string = File(inputName).readText().toLowerCase()
+    for (i in substrings) {
+        var el = 0
+        var elNum = Regex(i.toLowerCase()).find(string, el)
+        var x = 0
+        while (elNum != null) {
+            if (el > (string.length - 1)) break else
+                el = elNum.range.first + 1
+            elNum = Regex(i.toLowerCase()).find(string, el)
+            x++
+        }
+        result[i] = x
+    }
     return result
 }
 
